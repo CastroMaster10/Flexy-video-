@@ -30,11 +30,22 @@ module.exports = {
         test: /\.(s*)css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,   // Agregar SASS, preprocesador
+            loader: MiniCssExtractPlugin.loader, // Agregar SASS, preprocesador
           },
-          'css-loader',
-          'sass-loader'
+          "css-loader",
+          "sass-loader",
         ],
+      },
+      {
+        test: /\.(png|gif|jpg)$/,
+        use: [
+          {
+            'loader': 'file-loader',
+             options: {
+                name: 'assets/[hash].[ext]'
+             }
+          }
+        ]
       },
     ],
   },
@@ -43,8 +54,8 @@ module.exports = {
       template: "./public/index.html",
       filename: "./index.html",
     }),
-    new MiniCssExtractPlugin ({
-      filename: "assets/[name].css"
-    })
+    new MiniCssExtractPlugin({
+      filename: "assets/[name].css",
+    }),
   ],
 };
