@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Header from '../components/Header';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
@@ -8,12 +8,28 @@ import Footer from '../components/Footer';
 import '../assets/styles/App.scss';   //hoja de estilos
 
 
-const App = () => (
+const App = () => {
+
+  const [videos,setVideos ] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/initalState')
+    .then(response => response.json())
+    .then(data => setVideos(data));
+  },[])
+
+  console.log(videos);
+
+  return(
+    
   <div className="App">
     <Header />
     <Search />
+    {
 
-    <Categories title="Tendencias">
+    }
+
+    <Categories title="Mi lista">
       <Carousel>
         <Carouselitem />
         <Carouselitem />
@@ -51,7 +67,8 @@ const App = () => (
 
     <Footer />
   </div>
-);
+  );
+}
 
 export default App;
 
